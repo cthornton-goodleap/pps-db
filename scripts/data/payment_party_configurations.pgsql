@@ -8,7 +8,7 @@ DECLARE
 	new_party_id INTEGER;
 BEGIN
 	--insert party/party identifiers
-	FOR rec IN SELECT * FROM public.payment_party_configurations LOOP
+	FOR rec IN SELECT * FROM public.payment_party_configurations where "tenantId" IS NOT NULL LOOP
         INSERT INTO 
 			party.parties (tenant_id, created_by, updated_by, created_at, updated_at, is_deleted, is_test_data, type_id, organization_id) 
 		VALUES 
@@ -60,7 +60,7 @@ BEGIN
 		   END)
 		, (select pp."id" from party.parties as pp 
 			where pp."organization_id" = "organizationId"::text)
-	FROM public.payment_party_configurations;
+	FROM public.payment_party_configurations where "tenantId" IS NOT NULL;
 END;
 $$;
 

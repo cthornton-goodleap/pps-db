@@ -33,8 +33,10 @@ BEGIN
 			inner join public.payment_party_configurations as ppc
 			on ppc."organizationId"::text = p."organization_id"
 			where "paymentPartyConfigurationId" = ppc."id"
-		)
-	FROM public.payment_party_locations;
+		)  FROM public.payment_party_locations as ppl 
+		inner join public.payment_party_configurations as parentPPC
+		on ppl."paymentPartyConfigurationId" = parentPPC."id"
+		where parentPPC."tenantId" IS NOT NULL;
 END;
 $$;
 
