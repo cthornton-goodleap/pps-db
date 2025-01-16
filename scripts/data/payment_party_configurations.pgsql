@@ -18,7 +18,7 @@ BEGIN
 		INSERT INTO 
 			party.party_identifiers (tenant_id, created_by, updated_by, created_at, updated_at, is_deleted, is_test_data, party_id, type_id, identifier)
 		VALUES
-			(rec."tenantId", 'MIGRATION', 'MIGRATION', utcNow, utcNow, false, false, new_party_id, (select id from party.party_identifier_types where name = 'DirectoryId' limit 1), , rec."organizationId");
+			(rec."tenantId", 'MIGRATION', 'MIGRATION', utcNow, utcNow, false, false, new_party_id, (select id from party.party_identifier_types where name = 'DirectoryId' limit 1), rec."organizationId");
     END LOOP;
 
 	--insert accounts
