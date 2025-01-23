@@ -32,8 +32,8 @@ BEGIN
         , "location" --unsure, represents 'name' column
         , "location"
         , '1' --defaulting a value here
-        , (CASE "organizationId"
-			WHEN NULL then true
+        , (CASE WHEN "organizationId" IS NULL 
+			THEN true 
 			ELSE false
 		   END)
 	FROM public.disclosures;
