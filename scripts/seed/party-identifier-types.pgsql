@@ -3,10 +3,9 @@ begin;
 DO $$
 	
 DECLARE utcNow timestamp := NOW() AT TIME ZONE 'UTC';
-DECLARE tenantId text := ''; --CHECK TO MAKE SURE THIS IS WHAT WE WANT
 
 BEGIN
-	insert into party.party_identifier_types(tenant_id, created_by, updated_by, created_at, updated_at, is_deleted, is_test_data, name) values(tenantId, 'MIGRATION', 'MIGRATION', utcNow, utcNow, false, false, 'OrganizationId') on conflict(name) do nothing;
+	insert into party.party_identifier_types(created_by, updated_by, created_at, updated_at, is_deleted, is_test_data, name) values('MIGRATION', 'MIGRATION', utcNow, utcNow, false, false, 'OrganizationId') on conflict(name) do nothing;
 END;
 $$;
 
